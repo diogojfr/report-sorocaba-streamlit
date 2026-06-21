@@ -36,7 +36,7 @@ if not st.session_state.authenticated:
 
 # ── Main App ─────────────────────────────────────────────────────────────
 image_url = "sorocaba-logo.jpg"
-st.image(image_url, caption=' ',width=1300)
+st.image(image_url, caption=' ',width='stretch')
 
 st.set_page_config(
     page_title="Easy Pallet – Sorocaba Dashboard",
