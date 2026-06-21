@@ -5,7 +5,20 @@ from dotenv import load_dotenv
 
 # ── Authentication ───────────────────────────────────────────────────────
 load_dotenv()
-APP_PASSWORD = os.getenv("APP_PASSWORD")
+
+
+def _get_app_password():
+    """Senha vem do st.secrets (Streamlit Cloud) ou do .env/variável de ambiente (local)."""
+    try:
+        if "APP_PASSWORD" in st.secrets:
+            return st.secrets["APP_PASSWORD"]
+    except Exception:
+        # Nenhum arquivo de secrets configurado (ex.: rodando localmente)
+        pass
+    return os.getenv("APP_PASSWORD")
+
+
+APP_PASSWORD = _get_app_password()
 
 if 'authenticated' not in st.session_state:
     st.session_state.authenticated = False
